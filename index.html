@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Ringtail — Display &amp; Inquiry Board</title>
+<style>
+  :root{
+    --plate:#07090f; --plate2:#0b0f1a; --glass:rgba(148,180,255,.07); --glassline:rgba(148,180,255,.35);
+    --ink:#e8ecf7; --ink2:#9aa7c4; --neon:#7dd7ff; --neon2:#b18cff; --gold:#ffd98a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--plate);color:var(--ink);font-family:'Segoe UI',Verdana,Helvetica,Arial,sans-serif;line-height:1.55;
+    background-image:radial-gradient(900px 500px at 50% -80px, rgba(125,215,255,.10), transparent 60%)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px 56px}
+  .glass{background:var(--glass);border:1px solid var(--glassline);border-radius:14px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter:blur(6px)}
+  header.site{margin-top:20px;padding:20px 18px 16px;text-align:center}
+  .mark{display:inline-block;width:84px;height:84px}
+  .kicker{letter-spacing:.34em;text-transform:uppercase;font-size:11.5px;color:var(--neon);margin-top:4px}
+  nav.board-nav{margin:14px 0 2px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  nav.board-nav a{color:var(--ink);text-decoration:none;border:1px solid var(--glassline);border-radius:20px;
+    padding:5px 13px;font-size:13.5px;background:rgba(125,215,255,.05)}
+  nav.board-nav a:hover{border-color:var(--neon);color:var(--neon)}
+  .hero{padding:38px 0 6px;text-align:center}
+  .hero h1{font-size:clamp(34px,7vw,58px);line-height:1.08;font-weight:700;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--neon);text-shadow:0 0 18px rgba(125,215,255,.65)}
+  .hero p.lede{max-width:640px;margin:16px auto 0;font-size:clamp(16px,2.6vw,19px);color:var(--ink2)}
+  .frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:28px 0 6px}
+  .frame{padding:10px 10px 12px;text-align:center}
+  .frame .photo{aspect-ratio:4/3;border:1px dashed var(--glassline);border-radius:9px;display:flex;align-items:center;
+    justify-content:center;color:var(--ink2);font-size:13px;font-style:italic;padding:8px;background:rgba(0,0,0,.25)}
+  .frame figcaption{margin-top:9px;font-size:14px;color:var(--ink)}
+  section{margin-top:40px}
+  .panel{padding:24px 22px}
+  h2{font-size:clamp(23px,4.5vw,31px);margin-bottom:12px;font-weight:650}
+  h2 .no{color:var(--neon2);margin-right:8px;font-weight:400}
+  p.body{max-width:720px;margin-bottom:12px;font-size:16.5px;color:#d5dbec}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:6px}
+  .note{padding:15px 16px}
+  .note h3{font-size:16.5px;margin-bottom:6px;color:var(--gold)}
+  .note p{font-size:15px;color:var(--ink2)}
+  .pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .pair{padding:18px}
+  .pair .photo{aspect-ratio:16/9;border:1px dashed var(--glassline);border-radius:9px;display:flex;align-items:center;
+    justify-content:center;color:var(--ink2);font-style:italic;font-size:13px;margin-bottom:12px;background:rgba(0,0,0,.25)}
+  .pair h3{font-size:18.5px;margin-bottom:8px}
+  .pair ul{list-style:none;font-size:15px;color:var(--ink2)}
+  .pair ul li{padding:4px 0;border-bottom:1px solid rgba(148,180,255,.14)}
+  .pair ul li:last-child{border-bottom:none}
+  .pair ul b{color:var(--ink);font-weight:600}
+  .pair .status{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .pair .status span{border:1px solid var(--glassline);border-radius:20px;padding:3px 11px;font-size:12.5px;
+    letter-spacing:.06em;color:var(--ink2);background:rgba(125,215,255,.05)}
+  .pair .status span.on{color:var(--gold);border-color:var(--gold)}
+  .society a.mailto{color:var(--neon);font-weight:700;text-decoration:none;border-bottom:2px solid var(--neon2)}
+  .curl-divider{display:block;margin:6px auto 0;width:min(420px,80%)}
+  .ebook{text-align:center;padding:28px 22px}
+  .ebook h2{color:var(--neon)}
+  .ebook p{max-width:560px;margin:0 auto 18px;color:var(--ink2)}
+  .btn{display:inline-block;color:#06121f;background:linear-gradient(180deg,var(--neon),#4db8e8);text-decoration:none;
+    font-weight:700;padding:12px 24px;border-radius:8px;font-size:16px;box-shadow:0 0 22px rgba(125,215,255,.35)}
+  .contact{text-align:center;padding:24px 22px}
+  .contact a.mail{color:var(--neon);font-size:clamp(17px,3.4vw,21px);font-weight:700;text-decoration:none;border-bottom:2px solid var(--neon2)}
+  footer.site{margin-top:44px;padding:16px;text-align:center;color:var(--ink2);font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site glass">
+    <!-- Site mark: ringtail in neon line, tail curled over the back -->
+    <svg class="mark" viewBox="0 0 100 100" role="img" aria-label="American Ringtail mark">
+      <defs>
+        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="1.6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g fill="none" stroke="#7dd7ff" stroke-width="2.6" stroke-linecap="round" filter="url(#glow)">
+        <path d="M22 68 q-4 -18 8 -24 l6 -8 4 6 q10 -3 18 2 l7 -4 -1 8 q8 8 5 20 q-2 9 -12 10 l-24 1 q-9 -1 -11 -11 z"/>
+        <path d="M63 60 q20 -2 22 -20 q1 -13 -9 -15 q-8 -1 -9 6 q0 5 5 5" stroke="#b18cff"/>
+        <circle cx="38" cy="52" r="1.8" fill="#7dd7ff" stroke="none"/>
+      </g>
+    </svg>
+    <div class="kicker">Display &amp; Inquiry Board</div>
+    <nav class="board-nav">
+      <a href="#discovery">Discovery</a>
+      <a href="#board">The Board</a>
+      <a href="#society">The Society</a>
+      <a href="#seeking">What We&rsquo;re Seeking</a>
+      <a href="#ebook">The Ebook</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- 1. HERO -->
+  <div class="hero">
+    <h1>The American Ringtail,<br><em>Tail Carried High</em></h1>
+    <p class="lede">A display board for our American Ringtail cats &mdash; the breed whose tail curls
+      up and over the back like a plume. Browse the frames, read the discovery notes, and meet the
+      pairs on the board below.</p>
+
+    <!-- Neon tail-curl divider motif -->
+    <svg class="curl-divider" viewBox="0 0 420 40" aria-hidden="true">
+      <g fill="none" stroke="#7dd7ff" stroke-width="2" stroke-linecap="round" opacity=".85">
+        <path d="M6 30 H300"/>
+        <path d="M300 30 q70 0 76 -18 q4 -13 -8 -14 q-9 0 -9 8 q0 6 6 6" stroke="#b18cff"/>
+      </g>
+    </svg>
+
+    <div class="frames">
+      <figure class="frame glass"><div class="photo">Photo coming</div><figcaption>Pair One &mdash; photos coming</figcaption></figure>
+      <figure class="frame glass"><div class="photo">Photo coming</div><figcaption>Pair Two &mdash; photos coming</figcaption></figure>
+      <figure class="frame glass"><div class="photo">Photo coming</div><figcaption>The Ringtail Mark &mdash; photos coming</figcaption></figure>
+      <figure class="frame glass"><div class="photo">Photo coming</div><figcaption>On the Board &mdash; photos coming</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- 2. DISCOVERY -->
+  <section id="discovery" class="glass panel">
+    <h2><span class="no">I.</span>Discovery</h2>
+    <p class="body">The American Ringtail is named for its signature feature: a tail that curls
+      up and over the back, carried loosely like a ring rather than held straight. The curl is
+      natural to the breed &mdash; the tail is flexible and muscular, and the cat moves it freely.
+      It is not kinked, curled by handling, or held in place; the cat raises and relaxes it at will.</p>
+    <div class="cols">
+      <div class="note glass">
+        <h3>Temperament</h3>
+        <p>Ringtails are generally known as friendly, curious, and people-oriented cats. They tend
+          to follow household activity, greet visitors, and stay engaged with their families rather
+          than keeping to themselves.</p>
+      </div>
+      <div class="note glass">
+        <h3>The Tail</h3>
+        <p>The curled tail is the breed&rsquo;s hallmark. When the cat is relaxed or moving about,
+          the tail loops over the back; when the cat rests, it settles like any other tail. It is a
+          natural trait passed through the line.</p>
+      </div>
+      <div class="note glass">
+        <h3>Care Basics</h3>
+        <p>Care is the ordinary good care any cat deserves: sound nutrition, fresh water, a clean
+          litter station, regular veterinary visits, indoor living, and daily attention and play.
+          The curled tail needs no special handling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE BOARD -->
+  <section id="board" class="glass panel">
+    <h2><span class="no">II.</span>The Board &mdash; Our Pairs</h2>
+    <p class="body">We keep fully intact pairs in the papered TICA American Ringtail line. These pairs
+      will be receiving adoption out to known breeders. Placement is by inquiry only, and details of
+      each pair are given on inquiry.</p>
+    <div class="pairs">
+      <article class="pair glass">
+        <div class="photo">Pair photo coming</div>
+        <h3>Pair One &mdash; names on inquiry</h3>
+        <ul>
+          <li><b>Status:</b> Fully intact pair</li>
+          <li><b>Line:</b> Papered TICA American Ringtail</li>
+          <li><b>Placement:</b> Adoption out to known breeders</li>
+          <li><b>Details:</b> On inquiry</li>
+        </ul>
+      </article>
+      <article class="pair glass">
+        <div class="photo">Pair photo coming</div>
+        <h3>Pair Two &mdash; names on inquiry</h3>
+        <ul>
+          <li><b>Status:</b> Fully intact pair</li>
+          <li><b>Line:</b> Papered TICA American Ringtail</li>
+          <li><b>Placement:</b> Adoption out to known breeders</li>
+          <li><b>Details:</b> On inquiry</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4. THE SOCIETY — ADOPTION WING (new in V3) -->
+  <section id="society" class="glass panel society">
+    <h2><span class="no">III.</span>The Society &mdash; Bonded Pairs Seeking Their Forever Homes</h2>
+    <p class="body">Some of our ringtails live together as bonded pairs &mdash; two cats who have
+      grown up side by side and lean on each other. Those pairs were never going to stay with us
+      forever. We have been keeping them safe and loved while we waited for their forever homes
+      to come along, and now we are opening the door and letting those homes find them.</p>
+    <p class="body">The pairs on this page are fully intact, and they are placed selectively &mdash;
+      to known breeders in the papered American Ringtail world, and to genuine forever homes that
+      are ready to take two cats together and keep the line strong. Fewer animals in our house
+      also makes the air easier for our family&rsquo;s health, and that matters to us too &mdash;
+      but the heart of it is simple: these cats were always waiting for their people. Maybe
+      that&rsquo;s you.</p>
+
+    <!-- Bonded-pair profile cards. TEMPLATE SLOTS: every field below is a placeholder,
+         filled only when the owners supply the pair roster. Do not invent entries. -->
+    <div class="pairs">
+      <article class="pair glass">
+        <div class="photo">Pair photos &mdash; roster pending</div>
+        <h3>Pair names &mdash; roster pending</h3>
+        <ul>
+          <li><b>Their story:</b> Story &mdash; roster pending</li>
+          <li><b>The bond:</b> Bond &mdash; roster pending</li>
+          <li><b>Temperament:</b> Temperament &mdash; roster pending</li>
+          <li><b>The right home:</b> What the right home looks like &mdash; roster pending</li>
+        </ul>
+        <div class="status" aria-label="Placement status">
+          <span class="on">Seeking</span><span>In Conversation</span><span>Placed</span>
+        </div>
+      </article>
+      <article class="pair glass">
+        <div class="photo">Pair photos &mdash; roster pending</div>
+        <h3>Pair names &mdash; roster pending</h3>
+        <ul>
+          <li><b>Their story:</b> Story &mdash; roster pending</li>
+          <li><b>The bond:</b> Bond &mdash; roster pending</li>
+          <li><b>Temperament:</b> Temperament &mdash; roster pending</li>
+          <li><b>The right home:</b> What the right home looks like &mdash; roster pending</li>
+        </ul>
+        <div class="status" aria-label="Placement status">
+          <span class="on">Seeking</span><span>In Conversation</span><span>Placed</span>
+        </div>
+      </article>
+      <article class="pair glass">
+        <div class="photo">Pair photos &mdash; roster pending</div>
+        <h3>Pair names &mdash; roster pending</h3>
+        <ul>
+          <li><b>Their story:</b> Story &mdash; roster pending</li>
+          <li><b>The bond:</b> Bond &mdash; roster pending</li>
+          <li><b>Temperament:</b> Temperament &mdash; roster pending</li>
+          <li><b>The right home:</b> What the right home looks like &mdash; roster pending</li>
+        </ul>
+        <div class="status" aria-label="Placement status">
+          <span class="on">Seeking</span><span>In Conversation</span><span>Placed</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="cols">
+      <div class="note glass">
+        <h3>Known Breeders</h3>
+        <p>We welcome inquiries from known breeders working in the papered American Ringtail
+          line. Placements to breeders help strengthen the line, and each pair is considered
+          on its own merits.</p>
+      </div>
+      <div class="note glass">
+        <h3>Genuine Forever Homes</h3>
+        <p>A pair may also go to a genuine forever home &mdash; a family ready to love two cats
+          for the whole of their lives. Tell us about your home, and we will tell you honestly
+          whether a pair fits it.</p>
+      </div>
+      <div class="note glass">
+        <h3>Pairs Go as Pairs</h3>
+        <p>A bonded pair is placed together, always. The bond is not split &mdash; two cats who
+          have kept each other company their whole lives go to their new home the same way:
+          together.</p>
+      </div>
+    </div>
+
+    <p class="body" style="margin-top:16px">If one of these pairs sounds like your home, write to us
+      at <a class="mailto" href="mailto:sales@apexairsolutions.com">sales@apexairsolutions.com</a>
+      and tell us a little about yourself. Profiles are filled in pair by pair as the roster is
+      confirmed, so if a card above still reads &ldquo;roster pending,&rdquo; that pair&rsquo;s
+      page is on its way.</p>
+  </section>
+
+  <!-- 5. WHAT WE'RE SEEKING -->
+  <section id="seeking" class="glass panel">
+    <h2><span class="no">IV.</span>What We&rsquo;re Seeking</h2>
+    <p class="body">We are seeking known breeders in the papered TICA American Ringtail line who are
+      interested in our intact pairs. If you work in this line and would like to be considered when
+      the pairs are placed, we invite your inquiry. Tell us about your cattery, your line, and your
+      experience with the breed &mdash; placements are made to known breeders only.</p>
+  </section>
+
+  <!-- 6. THE EBOOK -->
+  <section id="ebook" class="glass panel ebook">
+    <h2>Our Ebook</h2>
+    <p>We&rsquo;ve put what we&rsquo;ve learned about living with and loving the American Ringtail
+      into an ebook. Take it with you &mdash; the breed, the tail, and the day-to-day of these cats,
+      in one place.</p>
+    <!-- LINK PENDING: ebook URL not yet supplied by the owners. Replace href="#" when the link lands. -->
+    <a class="btn" href="#">Get the Ebook</a>
+  </section>
+
+  <!-- 7. CONTACT -->
+  <section id="contact" class="glass panel contact">
+    <h2 style="text-align:left"><span class="no">V.</span>Contact</h2>
+    <p class="body" style="margin-left:auto;margin-right:auto">Breeder inquiries and questions about
+      the board are welcome by email:</p>
+    <p><a class="mail" href="mailto:sales@apexairsolutions.com">sales@apexairsolutions.com</a></p>
+  </section>
+
+  <footer class="site glass">
+    <p>American Ringtail Display &amp; Inquiry Board &middot; Informational site &middot; Placements to known breeders and genuine forever homes, by inquiry &middot; <span id="yr"></span></p>
+  </footer>
+
+</div>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
